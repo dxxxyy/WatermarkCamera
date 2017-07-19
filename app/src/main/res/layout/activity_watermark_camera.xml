@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f333b"
+    android:orientation="vertical">
+
+    <SurfaceView
+        android:id="@+id/sfv_camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="onPointFocus"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#2f333b"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btn_lamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="13dp"
+            android:background="@mipmap/fresh_close"
+            android:onClick="onSwitch" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="#2f333b"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@mipmap/ic_close_bottom_bar"
+                android:onClick="onClose" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/btn_take_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/take_photo_selector"
+                android:onClick="onTakePic"
+                android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/btn_save_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/save_photo_selector"
+                android:onClick="onSavePic"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_watermark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="showWatermark"
+                android:text="水印"
+                android:textColor="@color/white"
+                android:textSize="28sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_setting"
+        android:layout_below="@id/rl_top_bar">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/fl_watermark_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="65dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_watermark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#3232b4ca">
+
+                <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="13dp"
+                    android:ellipsize="end"
+                    android:onClick="onTextEdit"
+                    android:singleLine="true"
+                    android:text="水印文字"
+                    android:textColor="@color/white"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginRight="13dp"
+                    android:text="2017-7-4"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cancel_selector"
+                android:onClick="onCancel" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/focus_index"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/cam_focus"
+        android:visibility="invisible" />
+
+</RelativeLayout>

@@ -1,0 +1,137 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+//获取生成的产品名
+//def getProductName() {
+//    return "XJZS-Android"
+//}
+
+//获取打包的时间
+//def releaseTime() {
+//    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+//    String s = sdf.format(new Date());
+//    return s;
+//}
+
+android {
+    useLibrary "org.apache.http.legacy"
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    lintOptions {
+        //忽略一些构建信息，降低对错误的检查
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    defaultConfig {
+        applicationId "com.watermark.library"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 126
+        versionName "1.2.6"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile
+        }
+
+        release {
+            storeFile
+            storePassword
+            keyAlias
+            keyPassword
+        }
+    }
+
+    buildTypes {
+//        debug {
+//            //指定打release包的签名
+//            signingConfig signingConfigs.debug
+//            //启用multidex的支持
+//            multiDexEnabled true
+//        }
+        debug {
+            //启用混淆代码的功能
+            minifyEnabled false
+            //压缩对齐生成的apk包
+            zipAlignEnabled true
+            //移除无用的资源文件
+            shrinkResources true
+            //启用multidex的支持
+            multiDexEnabled true
+        }
+
+        release {
+            //启用混淆代码的功能
+            minifyEnabled false
+            //压缩对齐生成的apk包
+            zipAlignEnabled true
+            //指定混淆规则，需要压缩优化的混淆要把proguard-android.txt换成proguard-android.txt
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //指定打release包的签名
+            signingConfig signingConfigs.release
+            //移除无用的资源文件
+            shrinkResources true
+            //启用multidex的支持
+            multiDexEnabled true
+        }
+
+    }
+
+//    productFlavors {
+//        wandoujia {
+//            manifestPlaceholders = [CHANNEL_VALUE: 'wandoujia' , CHANNEL_ID:200]
+//        }
+//        qihu360 {
+//            manifestPlaceholders = [CHANNEL_VALUE: '360' , CHANNEL_ID:201]
+//        }
+//        baidu {
+//            manifestPlaceholders = [CHANNEL_VALUE: 'baidu' , CHANNEL_ID:202]
+//        }
+//    }
+
+    //修改生成的apk名字
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def oldFile = output.outputFile
+//            if (variant.buildType.name.equals('debug')) {
+//                def installApkName = getProductName() + "-Debug" + "-V${defaultConfig.versionName}" + '.apk'
+//                output.outputFile = new File(oldFile.parent, installApkName)
+//            } else if (variant.buildType.name.equals('release')) {
+////                def releaseApkName = getProductName() + "_v${defaultConfig.versionName}_${releaseTime()}_" + variant.productFlavors[0].name + '_release.apk'
+//                def releaseApkName = getProductName() + "-Release" + "-V${defaultConfig.versionName}-${releaseTime()}" + '.apk'
+//                output.outputFile = new File(oldFile.parent, releaseApkName)
+//            }
+//        }
+//    }
+//
+//    repositories {
+//        flatDir { dirs 'libs' }
+//    }
+}
+
+//读取文件中的信息来配置打包签名
+//File propFile = file('signing.properties');
+//if (propFile.exists()) {
+//    def Properties props = new Properties()
+//    props.load(new FileInputStream(propFile))
+//    if (props.containsKey('DEBUG_STORE_FILE') && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+//            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+//        android.signingConfigs.debug.storeFile = file(props['DEBUG_STORE_FILE'])
+//        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+//        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+//        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+//        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+//    } else {
+//        android.buildTypes.release.signingConfig = null
+//    }
+//} else {
+//    android.buildTypes.release.signingConfig = null
+//}
+
+dependencies {
+    compile project(':library')
+    apt "com.github.hotchemi:permissionsdispatcher-processor:$rootProject.ext.permissionsdispatcherVersion"
+}

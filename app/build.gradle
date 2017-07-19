@@ -28,8 +28,8 @@ android {
         applicationId "com.watermark.library"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 126
-        versionName "1.2.6"
+        versionCode 100
+        versionName "1.0.0"
     }
 
     signingConfigs {
